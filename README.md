@@ -1,1 +1,1 @@
-Check prices for selected Apartment complexes.
+A keyword scraper to find keywords and create review posts in an automated fashion.
