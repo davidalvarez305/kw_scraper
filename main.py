@@ -18,13 +18,15 @@ def main():
     for keyword in keywords:
 
         # Keyword status 'FALSE' means this keyword group has never been used before.
-        if keyword['status'] == 'FALSE':
+        if keyword['completed'] == 'FALSE':
             data = {
                 'group_name': keyword['group'],
                 'keyword': keyword['keyword'],
             }
-            products = requests.post(url, data=json.dumps(data), headers=headers)
-            send_mail(len(products['data']))
+            resp = requests.post(url, data=json.dumps(data), headers=headers)
+            products = resp.json()
+            print('RESP: ', products['data'])
+            # send_mail(len(products['data']))
 
 if __name__ == "__main__":
     main()
