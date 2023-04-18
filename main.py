@@ -13,6 +13,7 @@ def main():
 
     url = os.environ.get('REVIEW_POST_API')
     headers = {'Content-Type': 'application/json',
+               'X-SECRET-AGENT': str(os.environ.get('X_SECRET_AGENT')),
                'Authorization': 'Bearer ' + os.environ.get('AUTH_HEADER_STRING')}
 
     for keyword in keywords:

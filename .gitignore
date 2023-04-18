@@ -1,2 +1,4 @@
 *.env
 *.json
+deploy.sh
+__pycache__
