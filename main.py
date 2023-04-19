@@ -13,7 +13,6 @@ def main():
 
     url = os.environ.get('REVIEW_POST_API')
     headers = {'Content-Type': 'application/json',
-               'X-SECRET-AGENT': str(os.environ.get('X_SECRET_AGENT')),
                'Authorization': 'Bearer ' + os.environ.get('AUTH_HEADER_STRING')}
 
     for keyword in keywords:
@@ -24,10 +23,14 @@ def main():
                 'group_name': keyword['group'],
                 'keyword': keyword['keyword'],
             }
-            resp = requests.post(url, data=json.dumps(data), headers=headers)
-            products = resp.json()
-            print('RESP: ', products['data'])
-            # send_mail(len(products['data']))
+            try:
+                resp = requests.post(url, data=json.dumps(data), headers=headers)
+                products = resp.json()
+                send_mail(len(products['data']))
+            except BaseException as err:
+                print("Error: ", err)
+            finally:
+                continue
 
 if __name__ == "__main__":
     main()
