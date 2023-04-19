@@ -13,8 +13,12 @@ def write_values(spreadsheet_id, range, values):
         # Call the Sheets API
         sheet = service.spreadsheets()
 
+        data = []
+        for row in values:
+            data.append(row.values())
+
         body = {
-            "values": values
+            "values": data
         }
 
         sheet.values().update(

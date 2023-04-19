@@ -15,7 +15,7 @@ def main():
     headers = {'Content-Type': 'application/json',
                'Authorization': 'Bearer ' + os.environ.get('AUTH_HEADER_STRING')}
 
-    for keyword in keywords:
+    for index, keyword in enumerate(keywords):
 
         # Keyword status 'FALSE' means this keyword group has never been used before.
         if keyword['completed'] == 'FALSE':
@@ -26,6 +26,11 @@ def main():
             try:
                 resp = requests.post(url, data=json.dumps(data), headers=headers)
                 products = resp.json()
+
+                # Replace the products crawled with the amount of products returned from API
+                keywords[index]["products crawled"] = len(products['data'])
+                write_values(SHEET_ID, "Amazon!A:D", keywords)
+
                 send_mail(len(products['data']))
             except BaseException as err:
                 print("Error: ", err)
