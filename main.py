@@ -16,6 +16,7 @@ def main():
                'Authorization': 'Bearer ' + os.environ.get('AUTH_HEADER_STRING')}
 
     for index, keyword in enumerate(keywords):
+        print('keyword: ', keyword)
 
         # Keyword status 'FALSE' means this keyword group has never been used before.
         if keyword['completed'] == 'FALSE':
@@ -28,7 +29,8 @@ def main():
                 products = resp.json()
 
                 # Replace the products crawled with the amount of products returned from API
-                keywords[index]["products crawled"] = len(products['data'])
+                keywords[index]['products crawled'] = index
+
                 write_values(SHEET_ID, "Amazon!A:D", keywords)
 
                 send_mail(len(products['data']))

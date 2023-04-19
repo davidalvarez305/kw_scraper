@@ -13,9 +13,9 @@ def write_values(spreadsheet_id, range, values):
         # Call the Sheets API
         sheet = service.spreadsheets()
 
-        data = []
+        data = [['keyword', 'group', 'completed', 'products crawled']]
         for row in values:
-            data.append(row.values())
+            data.append(list(row.values()))
 
         body = {
             "values": data
