@@ -28,8 +28,10 @@ def main():
                 resp = requests.post(url, data=json.dumps(data), headers=headers)
                 products = resp.json()
 
+                print(f"{len(products['data'])} PRODUCTS CRAWLED FOR {keyword['keyword']}")
+
                 # Replace the products crawled with the amount of products returned from API
-                keywords[index]['products crawled'] = index
+                keywords[index]['products crawled'] = len(products['data'])
 
                 write_values(SHEET_ID, "Amazon!A:D", keywords)
 
