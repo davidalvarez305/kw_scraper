@@ -32,6 +32,7 @@ def main():
 
                 # Replace the products crawled with the amount of products returned from API
                 keywords[index]['products crawled'] = len(products['data'])
+                keywords[index]['completed'] = "TRUE"
 
                 write_values(SHEET_ID, "Amazon!A:D", keywords)
 
