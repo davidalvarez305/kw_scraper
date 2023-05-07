@@ -36,7 +36,7 @@ def main():
 
                 write_values(SHEET_ID, "Amazon!A:D", keywords)
 
-                send_mail(len(products['data']))
+                send_mail(products['data'])
             except BaseException as err:
                 print("Error: ", err)
             finally:
